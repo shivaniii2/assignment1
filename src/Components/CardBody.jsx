@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Card } from './Card';
 import { useSelector } from 'react-redux';
 
-export const CardBody = ({ activeTab }) => {
+export const CardBody = ({ activeTab ,loading }) => {
   const tabs = useSelector((store) => store.tabs);
   const [searchQuery, setSearchQuery] = useState('');
   const [items, setItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     setItems(activeTab === 'Resources' ? tabs.resourcesTab :
@@ -16,6 +18,21 @@ export const CardBody = ({ activeTab }) => {
   const filteredItems = items && items.filter(item =>
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+  const currentItems = filteredItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -33,7 +50,7 @@ export const CardBody = ({ activeTab }) => {
       </div>
 
       <div className='flex flex-wrap ml-36'>
-        {filteredItems && filteredItems.map((item) => (
+        {currentItems && currentItems.map((item) => (
           <Card
             key={item.id}
             iconUrl={item.icon_url}
@@ -42,6 +59,18 @@ export const CardBody = ({ activeTab }) => {
             title={item.title}
             category={item.category}
           />
+        ))}
+      </div>
+
+      <div className='flex justify-center mt-4'>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            className={`mx-1 px-3 py-1 border ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'}`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
         ))}
       </div>
     </>

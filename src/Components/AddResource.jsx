@@ -62,14 +62,11 @@ export const AddResource = () => {
     }
   };
 
-
-
-
   return (
     <div>
       <TopBar />
       <div className='flex justify-between'>
-        <div className='mx-auto my-0 mt-[6%] w-[20%]'>
+        <div className='mx-auto my-0 mt-[2%] w-[20%]'>
           <span className='text-3xl h-[70px] absolute' style={{ fontFamily: 'Rubik, sans-serif' }}>Item Details</span>
           <div>
             <div className='relative top-12 right-10 mt-3' style={{ fontFamily: "'HK Grotesk', sans-serif" }}>

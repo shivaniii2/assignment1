@@ -3,13 +3,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './Home'
 import { AddResource } from './AddResource'
 
-export const Body = () => {
+export const Body = ({loading}) => {
     
     
  let appRouter = createBrowserRouter([
     {
         path:'/',
-        element:<Home/>
+        element:<Home loading={loading}/>
     },
     {
         path:'/addResource',

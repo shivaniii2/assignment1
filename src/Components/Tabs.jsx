@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardBody } from './CardBody';
 
 
-export const Tabs = () => {
+export const Tabs = ({loading}) => {
     
     
     const [activeTab, setActiveTab] = useState('Resources');
@@ -27,7 +27,7 @@ export const Tabs = () => {
                 </span>
             ))}
          </div>
-        <CardBody   activeTab = {activeTab}/>
+        <CardBody   activeTab = {activeTab} loading={loading}/>
         
         </>
       

@@ -1,15 +1,14 @@
 
-import { Provider } from 'react-redux';
-import './App.css';
 import {Body} from './Components/Body';
 
 import { OPTIONS } from "./utils/constants";
 import { useDispatch } from "react-redux";
 import { addResources , addItemWithTagUser, addItemWithTagRequest} from "./utils/resourceSlice";
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 function App() {
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
    
   const getResources = async() =>{
       const data = await fetch('https://media-content.ccbp.in/website/react-assignment/resources.json',OPTIONS)
@@ -24,7 +23,7 @@ function App() {
      
       
       
-      
+      setLoading(false)
       
   }
   useEffect(()=>{
@@ -33,7 +32,7 @@ function App() {
   return (
   
       
-       <Body/>
+       <Body  loading={loading}/>
   
   );
 }
