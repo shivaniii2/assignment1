@@ -10,6 +10,7 @@ export const CardBody = ({ activeTab ,loading }) => {
   const itemsPerPage = 6;
 
   useEffect(() => {
+    setCurrentPage(1);
     setItems(activeTab === 'Resources' ? tabs.resourcesTab :
              activeTab === 'Requests' ? tabs.requestTab :
              activeTab === 'Users' ? tabs.usersTab : []);
@@ -61,7 +62,7 @@ export const CardBody = ({ activeTab ,loading }) => {
           />
         ))}
       </div>
-
+     {currentItems && currentItems.length >=6 && 
       <div className='flex justify-center mt-4'>
         {Array.from({ length: totalPages }, (_, index) => (
           <button
@@ -73,6 +74,7 @@ export const CardBody = ({ activeTab ,loading }) => {
           </button>
         ))}
       </div>
+}
     </>
   );
 };
