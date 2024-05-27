@@ -1,10 +1,12 @@
-
-import {Body} from './Components/Body';
+import {Body, appRouter} from './Components/Body';
 
 import { OPTIONS } from "./utils/constants";
 import { useDispatch } from "react-redux";
 import { addResources , addItemWithTagUser, addItemWithTagRequest} from "./utils/resourceSlice";
 import { useEffect,useState } from 'react';
+import { Home } from './Components/Home';
+import { Route, RouterProvider, Routes } from 'react-router-dom';
+import { AddResource } from './Components/AddResource';
 
 function App() {
   const dispatch = useDispatch()
@@ -29,11 +31,15 @@ function App() {
   useEffect(()=>{
       getResources()
   },[])
+
+
   return (
-  
-      
-       <Body  loading={loading}/>
-  
+    <Routes>
+      <Route path="/" element={<Home loading={loading} />} />
+      <Route path="/addResource" element={<AddResource />} />
+      {/* Add other routes here */}
+      <Route path="*" element={<Home loading={loading} />} />
+    </Routes>
   );
 }
 

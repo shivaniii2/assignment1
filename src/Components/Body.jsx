@@ -1,25 +1,27 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './Home'
 import { AddResource } from './AddResource'
 
-export const Body = ({loading}) => {
-    
-    
- let appRouter = createBrowserRouter([
+
+export const appRouter = createBrowserRouter(
+    [
+      {
+        path: '/',
+        element: <Home />,
+        children: [
+          {
+            path: 'addResource',
+            element: <AddResource />,
+          },
+        ],
+      },
+    ],
     {
-        path:'/',
-        element:<Home loading={loading}/>
-    },
-    {
-        path:'/addResource',
-        element:<AddResource/>
-        
+      basename: '/assignment1',
     }
- ])
- return(
-    <>
-     <RouterProvider router = {appRouter}/>
-    </>
- )
-}
+  );
+  
+  export const Body = ({ loading }) => {
+    return <></>;
+  };
