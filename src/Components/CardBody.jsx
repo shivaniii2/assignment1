@@ -7,7 +7,7 @@ export const CardBody = ({ activeTab ,loading }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 6;
 
   useEffect(() => {
     setItems(activeTab === 'Resources' ? tabs.resourcesTab :
